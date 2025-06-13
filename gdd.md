@@ -17,31 +17,31 @@
 
 ### 2.2 Game Loop
 1. [ ] Core player loop (describe steps) 
-    - Main menu 
-    - Lobby / character select
-    - Level select
-    - Gameplay loop 
+    - [ ] Main menu 
+    - [ ] Lobby / character select
+    - [ ] Level select
+    - [ ] Gameplay loop 
 
 2. [ ] Gameplay loop
-    - Shoot
-    - Parry
-    - Dodge
-    - Jump 
-    - Die
-    - Get point
-    - Win (or lose)
+    - [ ] Shoot
+    - [ ] Parry
+    - [ ] Dodge
+    - [ ] Jump 
+    - [ ] Die
+    - [ ] Get point
+    - [ ] Win (or lose)
 
 3. [ ] Progression loop (leveling, upgrades, etc.)
-    - Level up with games
-    - Unlock characters 
-    - Weapon skins
-    - Ranks
+    - [ ] Level up with games
+    - [ ] Unlock characters 
+    - [ ] Weapon skins
+    - [ ] Ranks
 
 4. [ ] Out-of-game loop 
-    - Match history
-    - Win rate
-    - Player stats
-    - Leaderboard
+    - [ ] Match history
+    - [ ] Win rate
+    - [ ] Player stats
+    - [ ] Leaderboard
 
 ### 2.3 Controls
 | Action      | Keyboard/Mouse |   Gamepad    |
