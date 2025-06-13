@@ -1,0 +1,39 @@
+name: Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Get dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y \
+        libasound2-dev \
+        libudev-dev \
+        libx11-dev \
+        libxcursor-dev \
+        libxrandr-dev \
+        libxinerama-dev \
+        libxi-dev \
+        libgl1-mesa-dev \
+        libwayland-dev \
+        libxkbcommon-dev \
+        pkg-config \
+        libssl-dev \
+        build-essential
+    - name: Build
+      run: cargo build
+    - name: Run tests
+      run: cargo test --verbose
