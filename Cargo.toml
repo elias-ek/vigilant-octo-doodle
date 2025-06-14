@@ -6,3 +6,5 @@ edition = "2024"
 [dependencies]
 bevy = "0.16.1"
 bevy_ecs_ldtk = "0.12.0"
+binrw = "0.15.0"
+crc32fast = "1.4.2"
