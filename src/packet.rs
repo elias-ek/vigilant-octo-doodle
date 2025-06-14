@@ -7,16 +7,10 @@ const MAGIC_BYTES: u32 = 0x13800818;
 #[derive(Debug)]
 #[binrw]
 #[brw(little, repr=u32)]
-enum PacketType {
+pub enum PacketType {
     Ping = 1,
     Pong = 2,
     A = 3,
-    B = 4,
-    C = 5,
-    D = 6,
-    E = 7,
-    F = 8,
-    G = 9,
 }
 
 #[derive(Debug)]
@@ -42,6 +36,19 @@ pub struct Packet {
 }
 
 impl Packet {
+    pub fn init(t: PacketType, payload: Vec<u8>) -> Self {
+        Self {
+            header: PacketHeader {
+                magic: MAGIC_BYTES,
+                header_size: size_of::<PacketHeader>() as u16,
+                payload_size: payload.len() as u32,
+                packet_type: t,
+                checksum: 0,
+            },
+            payload: payload,
+        }
+    }
+
     pub fn deserialize(data: &[u8]) -> io::Result<Self> {
         let mut cursor = Cursor::new(data);
 
@@ -140,5 +147,13 @@ mod tests {
         let data = packet.serialize();
         let err = Packet::deserialize(&data).unwrap_err();
         debug_assert_eq!(err.kind(), io::ErrorKind::InvalidData);
+    }
+
+    #[test]
+    fn packet_init() {
+        let packet = Packet::init(PacketType::Ping, Vec::new());
+
+        let data = packet.serialize();
+        _ = Packet::deserialize(&data).unwrap();
     }
 }
