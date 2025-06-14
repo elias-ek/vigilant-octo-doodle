@@ -31,20 +31,22 @@ struct PacketHeader {
 pub struct Packet {
     header: PacketHeader,
 
+    frame: u64,
     #[br(count = header.payload_size)]
     payload: Vec<u8>,
 }
 
 impl Packet {
-    pub fn init(t: PacketType, payload: Vec<u8>) -> Self {
+    pub fn init(t: PacketType, payload: Vec<u8>, frame: u64) -> Self {
         Self {
             header: PacketHeader {
                 magic: MAGIC_BYTES,
                 header_size: size_of::<PacketHeader>() as u16,
                 payload_size: payload.len() as u32,
                 packet_type: t,
-                checksum: 0,
+                checksum: crc32fast::hash(&payload),
             },
+            frame: frame,
             payload: payload,
         }
     }
@@ -104,6 +106,7 @@ mod tests {
                 packet_type: PacketType::A,
                 checksum: 0,
             },
+            frame: 0,
             payload: Vec::new(),
         };
 
@@ -123,6 +126,7 @@ mod tests {
                 packet_type: PacketType::A,
                 checksum: 0,
             },
+            frame: 0,
             payload: Vec::new(),
         };
 
@@ -141,6 +145,7 @@ mod tests {
                 packet_type: PacketType::A,
                 checksum: 0,
             },
+            frame: 0,
             payload: Vec::new(),
         };
 
@@ -151,9 +156,21 @@ mod tests {
 
     #[test]
     fn packet_init() {
-        let packet = Packet::init(PacketType::Ping, Vec::new());
+        let packet = Packet::init(PacketType::Ping, Vec::new(), 0);
 
         let data = packet.serialize();
         _ = Packet::deserialize(&data).unwrap();
+    }
+
+    #[test]
+    fn frame_and_payload_integrity() {
+        let payload = vec![1, 2, 3];
+        let packet = Packet::init(PacketType::Ping, payload, 10);
+
+        let data = packet.serialize();
+        let new_packet = Packet::deserialize(&data).unwrap();
+
+        debug_assert_eq!(new_packet.frame, 10);
+        debug_assert_eq!(new_packet.payload.len(), 3);
     }
 }
