@@ -1,4 +1,5 @@
 use bevy::{input::keyboard::KeyCode, prelude::*};
+use(crate) types;
 
 struct KeyBinds {
     up: KeyCode,
