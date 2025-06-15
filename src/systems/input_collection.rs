@@ -24,15 +24,15 @@ fn keyboard_input(keys: Res<ButtonInput<KeyCode>>, binds: Res<KeyBinds>) -> Play
         return PlayerInput::Up;
     }
 
-    if keys.just_pressed(binds.down) {
+    if keys.pressed(binds.down) {
         return PlayerInput::Down;
     }
 
-    if keys.just_pressed(binds.left) {
+    if keys.pressed(binds.left) {
         return PlayerInput::Left;
     }
 
-    if keys.just_pressed(binds.right) {
+    if keys.pressed(binds.right) {
         return PlayerInput::Right;
     }
 
