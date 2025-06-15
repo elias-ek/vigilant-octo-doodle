@@ -1,5 +1,12 @@
 #[derive(Clone, Debug)]
 pub enum PlayerInput {
     Noop,
-    Move,
+    Up,
+    Down,
+    Left,
+    Right,
+    Shoot,
+    Dodge,
+    Accept,
+    Cancel,
 }

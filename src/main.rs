@@ -10,7 +10,8 @@ fn main() {
     App::new()
         .insert_resource(LockstepFrame { current_frame: 0 })
         .insert_resource(InputBuffer::default())
-        .insert_resource(PlayerIds(vec![0, 1])) // Simplified: local + 1 remote player
+        .insert_resource(KeyBinds::default())
+        .insert_resource(PlayerIds(vec![0])) // Simplified: local + 1 remote player
         .add_event::<AdvanceFrameEvent>()
         .add_plugins(DefaultPlugins)
         .add_systems(Update, collect_local_input)

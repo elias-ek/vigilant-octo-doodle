@@ -19,37 +19,37 @@ fn bind_key(keys: Res<ButtonInput<KeyCode>>, mut binds: KeyBinds, in_type: char)
     binds
 }
 
-fn keyboard_input(keys: ButtonInput<KeyCode>, binds: KeyBinds) -> PlayerInput {
+fn keyboard_input(keys: Res<ButtonInput<KeyCode>>, binds: Res<KeyBinds>) -> PlayerInput {
     if keys.just_pressed(binds.up) {
-        // send jump/menu up action
+        return PlayerInput::Up;
     }
 
     if keys.just_pressed(binds.down) {
-        //send crouch/menu down action
+        return PlayerInput::Down;
     }
 
     if keys.just_pressed(binds.left) {
-        // send move/menu left action
+        return PlayerInput::Left;
     }
 
     if keys.just_pressed(binds.right) {
-        // send move/menu right action
+        return PlayerInput::Right;
     }
 
     if keys.just_pressed(binds.shoot) {
-        // send shoot action
+        return PlayerInput::Shoot;
     }
 
     if keys.just_pressed(binds.dodge) {
-        // send dodge action
+        return PlayerInput::Dodge;
     }
 
     if keys.just_pressed(binds.accept) {
-        // send menu accept action
+        return PlayerInput::Accept;
     }
 
     if keys.just_pressed(binds.cancel) {
-        // send menu cancel action
+        return PlayerInput::Cancel;
     }
 
     PlayerInput::Noop
