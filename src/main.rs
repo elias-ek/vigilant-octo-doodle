@@ -1,11 +1,14 @@
 use bevy::prelude::*;
 mod components;
+mod level;
 mod resources;
 mod systems;
 mod types;
 
+use bevy_ecs_ldtk::prelude::*;
 use bevy_rapier2d::prelude::*;
 use components::Player;
+use level::*;
 use resources::*;
 use systems::{frame_advance::*, input_collection::*, simulation::*};
 
@@ -15,10 +18,13 @@ fn main() {
         .insert_resource(InputBuffer::default())
         .insert_resource(KeyBinds::default())
         .insert_resource(PlayerIds(vec![0])) // Simplified: local + 1 remote player
+        .insert_resource(LevelSelection::index(0))
         .add_event::<AdvanceFrameEvent>()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
+        .add_plugins(LdtkPlugin)
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
-        .add_plugins(RapierDebugRenderPlugin::default())
+        //.add_plugins(RapierDebugRenderPlugin::default())
+        .add_systems(Startup, level_setup)
         .add_systems(Startup, setup)
         .add_systems(Startup, setup_physics)
         .add_systems(Update, collect_local_input)
