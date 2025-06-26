@@ -17,11 +17,11 @@ pub fn level_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 pub fn scale_cam(
-    mut cq: Query<&mut Projection, With<Camera2d>>,
-    wq: Query<&Window, With<PrimaryWindow>>,
+    mut cam_query: Query<&mut Projection, With<Camera2d>>,
+    win_query: Query<&Window, With<PrimaryWindow>>,
 ) {
-    let window = wq.single().unwrap();
-    let mut proj = cq.single_mut().unwrap();
+    let window = win_query.single().unwrap();
+    let mut proj = cam_query.single_mut().unwrap();
 
     let win_aspect = window.width() / window.height();
     let lvl_aspect = LEVEL_WIDTH / LEVEL_HEIGHT;

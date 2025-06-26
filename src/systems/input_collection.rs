@@ -72,7 +72,3 @@ pub fn collect_local_input(
 
     // TODO: send to remote players via networking
 }
-
-pub fn collect_remote_inputs() {
-    return;
-}
