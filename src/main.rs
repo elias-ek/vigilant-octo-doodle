@@ -31,11 +31,12 @@ fn main() {
         .add_systems(Update, collect_remote_inputs)
         .add_systems(Update, advance_simulation_if_ready)
         .add_systems(Update, simulate_frame)
+        .add_systems(Update, scale_cam)
         .run();
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn(Camera2d::default());
+    // commands.spawn(Camera2d::default());
 
     commands
         .spawn(RigidBody::KinematicPositionBased)
