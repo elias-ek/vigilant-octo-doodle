@@ -22,10 +22,22 @@ fn main() {
         .insert_resource(KeyBinds::default())
         .insert_resource(PlayerIds(vec![0])) // Simplified: local + 1 remote player
         .add_event::<AdvanceFrameEvent>()
-        .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
+        .add_plugins(
+            DefaultPlugins
+                .set(ImagePlugin::default_nearest())
+                // Set window title
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: "Towerfall Ascension 2".to_string(),
+                        ..default()
+                    }),
+                    ..default()
+                }),
+        )
         .add_plugins(LdtkPlugin)
         .init_state::<AppState>()
         .add_systems(Startup, setup)
+        .add_systems(Startup, load_project)
         .add_systems(OnEnter(AppState::LevelSelect), select_setup)
         .add_systems(OnEnter(AppState::InGame), level_setup)
         .add_systems(Update, collect_local_input)

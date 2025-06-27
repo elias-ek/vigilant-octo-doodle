@@ -11,7 +11,7 @@
 	"iid": "59c89860-3740-11f0-8695-a356bab525b3",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 72,
+	"nextUid": 73,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1312,7 +1312,7 @@
 	], "enums": [], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
-			"identifier": "Level_0",
+			"identifier": "The_Tower",
 			"iid": "59c8bf70-3740-11f0-8695-ab3254d4ff0b",
 			"uid": 0,
 			"worldX": 64,
@@ -1322,7 +1322,7 @@
 			"pxHei": 640,
 			"__bgColor": "#696A79",
 			"bgColor": null,
-			"useAutoIdentifier": true,
+			"useAutoIdentifier": false,
 			"bgRelPath": "tilesets/industrial/5. Industrial Tileset - Starter Pack 32p/3_Far_Background_Tile.png",
 			"bgPos": "CoverDirty",
 			"bgPivotX": 0.5,
